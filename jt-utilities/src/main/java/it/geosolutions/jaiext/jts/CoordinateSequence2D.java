@@ -25,9 +25,9 @@
 
 package it.geosolutions.jaiext.jts;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.CoordinateSequence;
-import com.vividsolutions.jts.geom.Envelope;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.CoordinateSequence;
+import org.locationtech.jts.geom.Envelope;
 
 /**
  * A lightweight implementation of JTS {@code CoordinateSequence} for 2D points.
@@ -286,18 +286,28 @@ public final class CoordinateSequence2D implements CoordinateSequence, Cloneable
 
     /**
      * Creates a deep copy of this sequence.
-     * 
-     * @return a new sequence with values 
+     *
+     * @return a new sequence with values
      */
-    @Override
-    public Object clone() {
+    public CoordinateSequence copy() {
         CoordinateSequence2D copy = new CoordinateSequence2D(x.length);
         for (int i = 0; i < x.length; i++) {
             copy.x[i] = x[i];
             copy.y[i] = y[i];
         }
-        
+
         return copy;
+    }
+
+    /**
+     * Creates a deep copy of this sequence.
+     * 
+     * @return a new sequence with values
+     * @deprecated 
+     */
+    @Override
+    public Object clone() {
+        return copy();
     }
     
 }
